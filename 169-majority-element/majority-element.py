@@ -3,6 +3,5 @@ class Solution:
         nums.sort()
         if len(nums)==1:
             return nums[0]
-        for i in range(len(nums)):
-            k = len(nums)//2
-            return nums[k]
+        k = len(nums)//2
+        return nums[k]
