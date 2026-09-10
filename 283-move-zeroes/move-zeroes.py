@@ -3,10 +3,12 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        j=0
+        insert_pos = 0
+
         for i in range(len(nums)):
             if nums[i]!=0:
-                temp = nums[i]
-                nums[i] = nums[j]
-                nums[j] = temp
-                j+=1
+                nums[insert_pos] = nums[i]
+                insert_pos+=1
+        
+        for i in range(insert_pos, len(nums)):
+            nums[i]=0
