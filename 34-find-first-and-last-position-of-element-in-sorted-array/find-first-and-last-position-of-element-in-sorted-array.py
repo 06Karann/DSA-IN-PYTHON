@@ -1,42 +1,25 @@
 class Solution:
-    def lowerBound(self, nums, target):
-        n = len(nums)
-        ans = n
-        l =0
-        r = n-1
+    def searchRange(self, nums: list[int], target: int) -> list[int]:
+        def binary_search(nums,target,is_first):
+            low = 0
+            high = len(nums)-1
+            result = -1
+            while low <= high:
+                mid = (low+high)//2
 
-        while l<=r:
-            mid = (l+r)//2
+                if nums[mid] == target:
+                    result = mid
+                    if is_first:
+                        high = mid-1
+                    else:
+                        low = mid+1
+                elif nums[mid] < target:
+                    low = mid+1
+                else:
+                    high = mid-1
+            return result
+        
+        first = binary_search(nums,target,True)
+        last = binary_search(nums,target,False)
 
-            if nums[mid] >= target:
-                ans = mid
-                r = mid-1
-            else:
-                # right
-                l = mid+1
-        return ans
-    def upperBound(self, nums, target):
-        n = len(nums)
-        ans = n
-        l =0
-        r = n-1
-
-        while l<=r:
-            mid = (l+r)//2
-
-            if nums[mid] > target:
-                ans = mid
-                r = mid-1
-            else:
-                # right
-                l = mid+1
-        return ans    
-    def searchRange(self, nums: List[int], target: int) -> List[int]:
-        lb = self.lowerBound(nums, target)
-        ub = self.upperBound(nums, target)
-
-        if lb == ub:
-            # not present
-            return [-1,-1]
-        else:
-            return [lb, ub-1]    
+        return [first, last]
