@@ -15,5 +15,4 @@ class Solution:
             if res > (INT_MAX - digit)//10:
                 return 0
             res = res*10+digit
-        return sign*res     
-
+        return sign*res 
